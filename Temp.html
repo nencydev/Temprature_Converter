@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            background-image: url('abc.jpg');
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            background-image: url("abc1.jpg");
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <label for="temperature">Enter temperature:</label>
+        <input type="text" id="temperature" placeholder="Enter temperature" />
+        <label for="fromScale">From:</label>
+        <select id="fromScale">
+            <option value="celsius">Celsius</option>
+            <option value="kelvin">Kelvin</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <label for="toScale">To:</label>
+        <select id="toScale">
+            <option value="celsius">Celsius</option>
+            <option value="kelvin">Kelvin</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const temperature = parseFloat(document.getElementById("temperature").value);
+            const fromScale = document.getElementById("fromScale").value;
+            const toScale = document.getElementById("toScale").value;
+
+            if (!isNaN(temperature)) {
+                let result;
+
+                if (fromScale === "celsius" && toScale === "kelvin") {
+                    result = temperature + 273.15 + " K";
+                } else if (fromScale === "celsius" && toScale === "fahrenheit") {
+                    result = (temperature * 9/5) + 32 + " °F";
+                } else if (fromScale === "kelvin" && toScale === "celsius") {
+                    result = temperature - 273.15 + " °C";
+                } else if (fromScale === "kelvin" && toScale === "fahrenheit") {
+                    result = (temperature * 9/5) - 459.67 + " °F";
+                } else if (fromScale === "fahrenheit" && toScale === "celsius") {
+                    result = (temperature - 32) * 5/9 + " °C";
+                } else if (fromScale === "fahrenheit" && toScale === "kelvin") {
+                    result = (temperature + 459.67) * 5/9 + " K";
+                } else {
+                    result = temperature + " " + toScale;
+                }
+
+                document.getElementById("result").innerHTML = `Converted Temperature: ${result}`;
+            } else {
+                alert("Please enter a valid temperature.");
+            }
+        }
+    </script>
+</body>
+</html>
